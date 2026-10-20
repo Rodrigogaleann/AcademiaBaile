@@ -4,7 +4,7 @@ body.admin { background: var(--crema) var(--grano); min-height: 100vh; }
 
 /* ---- Login ---- */
 .login { display: grid; min-height: 100vh; grid-template-columns: 1.1fr 1fr; }
-.login__img { position: relative; background: #5d3476 url('../../public/assets/img/hero-bailarines.jpg') center/cover; }
+.login__img { position: relative; background: #5d3476 url('../../assets/img/hero-bailarines.jpg') center/cover; }
 .login__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(68,31,98,.55), transparent 60%); }
 .login__lado { display: grid; place-items: center; padding: 2rem; }
 .login__card { width: min(100%, 400px); animation: subir .7s var(--ease) both; }

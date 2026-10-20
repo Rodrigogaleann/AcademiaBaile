@@ -1,4 +1,4 @@
 node_modules/
 .DS_Store
 # Credenciales locales (usar config.example.js como plantilla)
-src/js/config.js
+#
