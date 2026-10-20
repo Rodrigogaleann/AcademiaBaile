@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel | Administración</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../src/css/variables.css" />
+  <link rel="stylesheet" href="../../src/css/base.css" />
+  <link rel="stylesheet" href="../../src/css/admin.css" />
+</head>
+<!-- Oculto hasta que admin.js confirme la sesión con getSession() -->
+<body class="admin" hidden>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="15.5" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <a class="topbar__logo disp" href="../index.html" style="text-decoration:none">Academia de Baile</a>
+    <div class="topbar__der">
+      <nav class="topbar__nav" aria-label="Panel"><a href="dashboard.html" aria-current="page">Alumnos</a><a href="estilos.html">Estilos</a></nav>
+      <div class="topbar__user"><span id="usuario"></span><button class="btn-salir" id="salir" type="button">Cerrar sesión</button></div>
+    </div>
+  </header>
+
+  <main class="panel">
+    <h1 class="panel__titulo disp">Alumnos</h1>
+
+    <section class="resumen" aria-label="Resumen">
+      <div class="dato"><b id="r-total">0</b><span>Alumnos activos</span></div>
+      <div class="dato" style="--c:#F59E0B"><b id="r-pendiente">0</b><span>Pendientes</span></div>
+      <div class="dato" style="--c:#22C55E"><b id="r-abonado">0</b><span>Abonados</span></div>
+      <div class="dato" style="--c:#EF4444"><b id="r-deuda">0</b><span>Con deuda</span></div>
+    </section>
+
+    <div class="barra">
+      <input type="search" id="buscar" placeholder="Buscar por nombre, apellido o celular" aria-label="Buscar alumno" />
+      <div class="chips" id="filtros">
+        <button type="button" data-f="todos" class="on">Todos</button>
+        <button type="button" data-f="pendiente">Pendiente</button>
+        <button type="button" data-f="abonado">Abonado</button>
+        <button type="button" data-f="deuda">Deuda</button>
+      </div>
+      <select id="f-activo" class="sel-activo" aria-label="Mostrar alumnos">
+        <option value="todos">Activos e inactivos</option><option value="activos">Solo activos</option><option value="inactivos">Solo inactivos</option>
+      </select>
+      <button class="boton" id="nuevo" type="button">+ Nuevo alumno</button>
+    </div>
+
+    <div class="tabla-wrap">
+      <div class="filtro-estilo">
+        <label for="filtro-estilo">Filtrar por estilo</label>
+        <select id="filtro-estilo" class="sel-activo"></select>
+      </div>
+      <div class="tabla-top">
+        <label class="todos" title="Solo se tildan los alumnos activos"><input type="checkbox" id="sel-todos" /> Tildar todos</label>
+        <span id="sel-cuenta" class="sel-cuenta"></span>
+        <button class="boton boton--wa" id="enviar-masivo" type="button" hidden>
+          <svg class="ico"><use href="#i-wa"/></svg>Enviar mensaje de pago pendiente
+        </button>
+        <button class="boton boton--sec boton--chico" id="limpiar-sel" type="button" hidden>Quitar selección</button>
+      </div>
+      <table>
+        <thead><tr><th class="col-check"><span class="sr">Seleccionar</span></th><th>Alumno</th><th>Celular</th><th>Estilo</th><th>Estado de pago</th><th>Activo</th><th>Acciones</th></tr></thead>
+        <tbody id="alumnos"></tbody>
+      </table>
+      <p id="vacio" hidden></p>
+    </div>
+    <div class="error" id="aviso" role="alert" hidden></div>
+  </main>
+
+  <dialog id="dlg-alumno">
+    <form id="form-alumno" method="dialog" novalidate>
+      <h2 class="disp" id="dlg-titulo">Nuevo alumno</h2>
+      <div class="error" id="form-error" role="alert" hidden></div>
+      <div class="fila2">
+        <label class="campo">Nombre<input name="nombre" required /></label>
+        <label class="campo">Apellido<input name="apellido" required /></label>
+      </div>
+      <label class="campo">Celular (con código de área)<input name="celular" inputmode="tel" placeholder="Ej: 11 2345 6789" /></label>
+      <div class="fila2">
+        <label class="campo">Estilo<select name="estilo_id" id="f-estilo"></select></label>
+        <label class="campo">Estado de pago
+          <select name="estado_pago"><option value="pendiente">Pendiente</option><option value="abonado">Abonado</option><option value="deuda">Deuda</option></select>
+        </label>
+      </div>
+      <div class="modal__pie">
+        <button class="boton boton--sec" type="button" data-cerrar>Cancelar</button>
+        <button class="boton" id="guardar" type="submit">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-envio" class="dlg-ancho">
+    <h2 class="disp">Mensaje de pago pendiente</h2>
+    <p class="envio__ayuda">Solo se incluyen alumnos activos. WhatsApp no permite abrir muchos chats a la vez. Tocá <b>Abrir siguiente</b> para ir uno por uno (el mensaje ya viene escrito, solo apretás enviar), o usá el botón de cada alumno.</p>
+    <p class="envio__prog" id="envio-prog"></p>
+    <ul class="envio__lista" id="envio-lista"></ul>
+    <div class="modal__pie">
+      <button class="boton boton--sec" type="button" data-cerrar>Cerrar</button>
+      <button class="boton boton--wa" id="envio-sig" type="button">Abrir siguiente</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="../../src/js/admin.js"></script>
+</body>
+</html>

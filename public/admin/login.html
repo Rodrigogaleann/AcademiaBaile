@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingresar | Administración</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../src/css/variables.css" />
+  <link rel="stylesheet" href="../../src/css/base.css" />
+  <link rel="stylesheet" href="../../src/css/admin.css" />
+</head>
+<body class="admin">
+  <main class="login">
+    <div class="login__img" role="img" aria-label="Bailarín de breakdance y bailarina de ballet"></div>
+    <div class="login__lado">
+      <form class="login__card" id="form" novalidate>
+        <h1 class="disp">Ingresar</h1>
+        <p>Panel de administración de la academia</p>
+        <div class="error" id="error" role="alert" hidden></div>
+        <label class="campo">Email<input type="email" id="email" autocomplete="username" required /></label>
+        <label class="campo">Contraseña<input type="password" id="password" autocomplete="current-password" required /></label>
+        <button class="boton boton--bloque" id="enviar" type="submit">Ingresar</button>
+        <a class="volver" href="../index.html">← Volver al sitio</a>
+      </form>
+    </div>
+  </main>
+  <script type="module">
+    import { iniciarSesion, redirigirSiHaySesion } from '../../src/js/auth.js';
+    await redirigirSiHaySesion('dashboard.html');
+    const form = document.getElementById('form'), error = document.getElementById('error'), enviar = document.getElementById('enviar');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      error.hidden = true; enviar.disabled = true; enviar.textContent = 'Ingresando...';
+      try {
+        await iniciarSesion(form.email.value.trim(), form.password.value);
+        location.replace('dashboard.html');
+      } catch (err) {
+        error.textContent = err.message; error.hidden = false;
+        enviar.disabled = false; enviar.textContent = 'Ingresar';
+      }
+    });
+  </script>
+</body>
+</html>

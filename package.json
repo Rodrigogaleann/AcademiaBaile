@@ -1,0 +1,9 @@
+{
+  "name": "academia-baile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing + panel de administración para academia de baile (Supabase)",
+  "scripts": {
+    "dev": "npx serve . -l 3000"
+  }
+}

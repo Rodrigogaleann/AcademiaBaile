@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estilos | Administración</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../src/css/variables.css" />
+  <link rel="stylesheet" href="../../src/css/base.css" />
+  <link rel="stylesheet" href="../../src/css/admin.css" />
+</head>
+<!-- Oculto hasta que admin-estilos.js confirme la sesión con getSession() -->
+<body class="admin" hidden>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <a class="topbar__logo disp" href="../index.html" style="text-decoration:none">Academia de Baile</a>
+    <div class="topbar__der">
+      <nav class="topbar__nav" aria-label="Panel"><a href="dashboard.html">Alumnos</a><a href="estilos.html" aria-current="page">Estilos</a></nav>
+      <div class="topbar__user"><span id="usuario"></span><button class="btn-salir" id="salir" type="button">Cerrar sesión</button></div>
+    </div>
+  </header>
+
+  <main class="panel">
+    <h1 class="panel__titulo disp">Estilos</h1>
+    <div class="barra">
+      <input type="search" id="buscar" placeholder="Buscar estilo" aria-label="Buscar estilo" />
+      <button class="boton" id="nuevo" type="button">+ Nuevo estilo</button>
+    </div>
+    <div class="tabla-wrap">
+      <table class="sin-check">
+        <thead><tr><th>Estilo</th><th>Descripción</th><th>Activo</th><th>Acciones</th></tr></thead>
+        <tbody id="estilos"></tbody>
+      </table>
+      <p id="vacio" hidden></p>
+    </div>
+    <div class="error" id="aviso" role="alert" hidden></div>
+  </main>
+
+  <dialog id="dlg-estilo">
+    <form id="form-estilo" method="dialog" novalidate>
+      <h2 class="disp" id="dlg-titulo">Nuevo estilo</h2>
+      <div class="error" id="form-error" role="alert" hidden></div>
+      <label class="campo">Nombre<input name="nombre" required maxlength="60" /></label>
+      <label class="campo">Descripción<textarea name="descripcion" rows="3" maxlength="300"></textarea></label>
+      <div class="modal__pie">
+        <button class="boton boton--sec" type="button" data-cerrar>Cancelar</button>
+        <button class="boton" id="guardar" type="submit">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-baja">
+    <h2 class="disp">Dar de baja</h2>
+    <p>¿Dar de baja el estilo <b id="baja-nombre"></b>? <span id="baja-alumnos"></span> Se puede volver a activar con el switch.</p>
+    <div class="modal__pie">
+      <button class="boton boton--sec" type="button" data-cerrar>Cancelar</button>
+      <button class="boton boton--peligro" id="confirmar-baja" type="button">Dar de baja</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="../../src/js/admin-estilos.js"></script>
+</body>
+</html>

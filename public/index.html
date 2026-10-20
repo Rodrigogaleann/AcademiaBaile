@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Academia de Baile | Clases de hip hop, ballet y más para todas las edades</title>
+  <meta name="description" content="Clases de baile para chicos, jóvenes y adultos: hip hop, ballet y más estilos. Reservá tu clase de prueba por WhatsApp." />
+  <meta property="og:title" content="Academia de Baile | Bailá a tu manera" />
+  <meta property="og:description" content="Clases de hip hop, ballet y más estilos. Reservá tu clase de prueba." />
+  <meta property="og:image" content="assets/img/hero-bailarines.jpg" />
+  <script>document.documentElement.classList.add('js')</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"DanceSchool","name":"Academia de Baile","description":"Clases de baile para todas las edades"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/css/variables.css" />
+  <link rel="stylesheet" href="../src/css/base.css" />
+  <link rel="stylesheet" href="../src/css/landing.css" />
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5H16l.5-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.6V21h2.9z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="15.5" cy="12" r="1.2" fill="currentColor"/></symbol>
+</svg>
+
+<main class="page con-video">
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#" aria-label="Academia de Baile, inicio"><i></i>Academia de Baile</a>
+    <ul class="nav__links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#estilos">Estilos</a></li>
+      <li><a href="#clases">Clases</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li class="nav__redes">
+        <a class="red" data-ig target="_blank" rel="noopener" aria-label="Instagram" href="#"><svg class="ico"><use href="#i-ig"/></svg></a>
+        <a class="red" data-fb target="_blank" rel="noopener" aria-label="Facebook" href="#"><svg class="ico"><use href="#i-fb"/></svg></a>
+      </li>
+    </ul>
+    <div class="nav__der">
+      <a class="red" data-ig target="_blank" rel="noopener" aria-label="Instagram" href="#"><svg class="ico"><use href="#i-ig"/></svg></a>
+      <a class="red" data-fb target="_blank" rel="noopener" aria-label="Facebook" href="#"><svg class="ico"><use href="#i-fb"/></svg></a>
+      <a class="nav__admin" href="admin/login.html">Acceso admin</a>
+      <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Presentación">
+    <div class="hero__top">
+      <h1 class="hero__title disp"><span class="w t-claro" style="--i:0">Bailá</span> <span class="w t-claro" style="--i:1">a</span> <span class="w t-oscuro" style="--i:2">tu</span> <span class="w t-oscuro" style="--i:3">manera</span></h1>
+      <div class="hero__row">
+        <div class="hero__actions">
+          <p class="hero__lead" data-fade data-y="20" data-delay="0.45">Clases de hip hop, ballet y más estilos para chicos, jóvenes y adultos. Empezá con una clase de prueba.</p>
+          <a class="btn btn--pulso" data-wa data-fade data-y="20" data-delay="0.6" target="_blank" rel="noopener" href="#"><svg class="ico"><use href="#i-wa"/></svg>Reservar clase de prueba</a>
+          <a class="link-sutil" href="#estilos">Ver estilos</a>
+        </div>
+        <!-- Cifras de ejemplo: editarlas en landing.js (STATS) -->
+        <div class="stats" id="stats" data-fade data-y="20" data-delay="0.75"></div>
+      </div>
+    </div>
+    <div class="hero__stage">
+      <img class="hero__img" hidden src="assets/img/hero-bailarines.jpg" width="1376" height="768" alt="Un bailarín de breakdance en equilibrio sobre una mano junto a una bailarina de ballet en puntas" />
+      <!-- Video de fondo en loop (fuente elegida en landing.js: vertical en celular si existe). Si falla, se muestra la foto -->
+      <video class="hero__img hero__video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg" aria-label="Bailarina de ballet girando en un estudio de danza"></video>
+    </div>
+  </section>
+
+  <div class="resto">
+    <section class="marquee" aria-hidden="true"><div class="marquee__row"></div><div class="marquee__row"></div></section>
+
+    <section class="about" id="nosotros">
+      <img class="deco deco--tl" data-fade data-x="-80" data-y="0" data-delay="0.1" data-duration="0.9" src="assets/img/deco-1.jpg" alt="" loading="lazy" />
+      <img class="deco deco--bl" data-fade data-x="-80" data-y="0" data-delay="0.25" data-duration="0.9" src="assets/img/deco-4.jpg" alt="" loading="lazy" />
+      <img class="deco deco--tr" data-fade data-x="80" data-y="0" data-delay="0.15" data-duration="0.9" src="assets/img/deco-3.jpg" alt="" loading="lazy" />
+      <img class="deco deco--br" data-fade data-x="80" data-y="0" data-delay="0.3" data-duration="0.9" src="assets/img/deco-2.jpg" alt="" loading="lazy" />
+      <div class="about__bloque">
+        <h2 class="titulo titulo--g" data-fade data-y="40">Nosotros</h2>
+        <p class="about__texto" data-reveal>Somos una academia de baile donde cada alumno encuentra su propio ritmo. Damos clases para todas las edades y niveles, con profesores que acompañan cada paso. ¡Vení a bailar con nosotros!</p>
+      </div>
+      <a class="btn-contact" data-wa target="_blank" rel="noopener" href="#">Contactanos</a>
+    </section>
+
+    <section class="capa beneficios" aria-labelledby="t-ben">
+      <h2 class="titulo" id="t-ben" data-fade data-y="40">Por qué bailar acá</h2>
+      <div class="bento" id="bento"></div>
+    </section>
+
+    <section class="capa estilos" id="estilos">
+      <h2 class="titulo" data-fade data-y="40">Estilos</h2>
+      <ol class="estilos__lista"></ol>
+    </section>
+
+    <section class="capa clases" id="clases">
+      <h2 class="titulo titulo--g">Clases</h2>
+      <div class="stack"></div>
+    </section>
+
+    <section class="capa testimonios" aria-labelledby="t-tes">
+      <h2 class="titulo" id="t-tes" data-fade data-y="40">Lo que dicen</h2>
+      <div class="testis" id="testis"></div>
+    </section>
+
+    <section class="capa faq" id="faq">
+      <h2 class="titulo" data-fade data-y="40">Preguntas</h2>
+      <div class="faq__lista" id="faq-lista"></div>
+    </section>
+
+    <section class="capa cta" aria-labelledby="t-cta">
+      <h2 class="cta__titulo disp" id="t-cta" data-fade data-y="40">Tu primera clase te espera</h2>
+      <p class="cta__sub" data-fade data-delay="0.1">Escribinos por WhatsApp, elegí tu estilo y empezá a bailar.</p>
+      <a class="btn btn--xl btn--pulso" data-wa data-fade data-delay="0.2" target="_blank" rel="noopener" href="#"><svg class="ico"><use href="#i-wa"/></svg>Reservar clase de prueba</a>
+      <ul class="cta__micro" data-fade data-delay="0.3"><li>Todas las edades</li><li>Todos los niveles</li><li>Respondemos por WhatsApp</li></ul>
+    </section>
+
+    <footer class="footer" id="contacto">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">Academia de Baile</p>
+          <p>Clases de baile para todas las edades. Hip hop, ballet y más.</p>
+          <div class="redes">
+            <a class="red" data-ig target="_blank" rel="noopener" aria-label="Instagram" href="#"><svg class="ico"><use href="#i-ig"/></svg></a>
+            <a class="red" data-fb target="_blank" rel="noopener" aria-label="Facebook" href="#"><svg class="ico"><use href="#i-fb"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Secciones"><h4>Secciones</h4>
+          <ul><li><a href="#nosotros">Nosotros</a></li><li><a href="#estilos">Estilos</a></li><li><a href="#clases">Clases</a></li><li><a href="#faq">Preguntas</a></li></ul>
+        </nav>
+        <div><h4>Cuota</h4>
+          <ul><li>Se abona del 1 al 10</li><li>Mercado Pago o efectivo</li></ul>
+        </div>
+        <div><h4>Contacto</h4>
+          <ul><li><a data-wa target="_blank" rel="noopener" href="#">WhatsApp</a></li><li><a href="admin/login.html">Acceso admin</a></li></ul>
+        </div>
+      </div>
+      <div class="footer__pie"><span>© <span id="anio"></span> Academia de Baile</span><span>Todos los derechos reservados</span></div>
+    </footer>
+  </div>
+</main>
+<script type="module" src="../src/js/landing.js"></script>
+</body>
+</html>
