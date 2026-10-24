@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Estilos | Administración</title>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../src/css/variables.css" />
-  <link rel="stylesheet" href="../../src/css/base.css" />
-  <link rel="stylesheet" href="../../src/css/admin.css" />
+  <link rel="stylesheet" href="../src/css/variables.css" />
+  <link rel="stylesheet" href="../src/css/base.css" />
+  <link rel="stylesheet" href="../src/css/admin.css" />
 </head>
 <!-- Oculto hasta que admin-estilos.js confirme la sesión con getSession() -->
 <body class="admin" hidden>
@@ -19,7 +19,7 @@
   <header class="topbar">
     <a class="topbar__logo disp" href="../index.html" style="text-decoration:none">Academia de Baile</a>
     <div class="topbar__der">
-      <nav class="topbar__nav" aria-label="Panel"><a href="dashboard.html">Alumnos</a><a href="estilos.html" aria-current="page">Estilos</a></nav>
+      <nav class="topbar__nav" aria-label="Panel"><a href="dashboard.html">Alumnos</a><a href="estilos.html" aria-current="page">Estilos</a><a href="precios.html">Precios</a></nav>
       <div class="topbar__user"><span id="usuario"></span><button class="btn-salir" id="salir" type="button">Cerrar sesión</button></div>
     </div>
   </header>
@@ -32,7 +32,7 @@
     </div>
     <div class="tabla-wrap">
       <table class="sin-check">
-        <thead><tr><th>Estilo</th><th>Descripción</th><th>Activo</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Estilo</th><th>Descripción</th><th>Días y horarios</th><th>Precios</th><th>Activo</th><th>Acciones</th></tr></thead>
         <tbody id="estilos"></tbody>
       </table>
       <p id="vacio" hidden></p>
@@ -40,12 +40,18 @@
     <div class="error" id="aviso" role="alert" hidden></div>
   </main>
 
-  <dialog id="dlg-estilo">
+  <dialog id="dlg-estilo" class="dlg-ancho">
     <form id="form-estilo" method="dialog" novalidate>
       <h2 class="disp" id="dlg-titulo">Nuevo estilo</h2>
       <div class="error" id="form-error" role="alert" hidden></div>
       <label class="campo">Nombre<input name="nombre" required maxlength="60" /></label>
       <label class="campo">Descripción<textarea name="descripcion" rows="3" maxlength="300"></textarea></label>
+      <div class="fila2">
+        <label class="campo">Precio por clase<input name="precio_clase" inputmode="decimal" placeholder="Ej: 8000" /></label>
+        <label class="campo">Precio mensual<input name="precio_mensual" inputmode="decimal" placeholder="Ej: 25000" /></label>
+      </div>
+      <label class="campo">Días de dictado<input name="dias_dictado" maxlength="80" placeholder="Ej: Lunes y miércoles" /></label>
+      <label class="campo">Horarios<input name="horarios" maxlength="120" placeholder="Ej: 18:00 a 19:00" /></label>
       <div class="modal__pie">
         <button class="boton boton--sec" type="button" data-cerrar>Cancelar</button>
         <button class="boton" id="guardar" type="submit">Guardar</button>
@@ -62,6 +68,6 @@
     </div>
   </dialog>
 
-  <script type="module" src="../../src/js/admin-estilos.js"></script>
+  <script type="module" src="../src/js/admin-estilos.js"></script>
 </body>
 </html>

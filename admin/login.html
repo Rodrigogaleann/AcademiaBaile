@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ingresar | Administración</title>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../src/css/variables.css" />
-  <link rel="stylesheet" href="../../src/css/base.css" />
-  <link rel="stylesheet" href="../../src/css/admin.css" />
+  <link rel="stylesheet" href="../src/css/variables.css" />
+  <link rel="stylesheet" href="../src/css/base.css" />
+  <link rel="stylesheet" href="../src/css/admin.css" />
 </head>
 <body class="admin">
   <main class="login">
@@ -25,7 +25,7 @@
     </div>
   </main>
   <script type="module">
-    import { iniciarSesion, redirigirSiHaySesion } from '../../src/js/auth.js';
+    import { iniciarSesion, redirigirSiHaySesion } from '../src/js/auth.js';
     await redirigirSiHaySesion('dashboard.html');
     const form = document.getElementById('form'), error = document.getElementById('error'), enviar = document.getElementById('enviar');
     form.addEventListener('submit', async (e) => {

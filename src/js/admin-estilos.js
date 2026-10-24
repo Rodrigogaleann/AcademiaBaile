@@ -2,6 +2,7 @@ import { requireSession, cerrarSesion } from './auth.js';
 import { estilosService } from './services/estilos.service.js';
 import { alumnosService } from './services/alumnos.service.js';
 import { describirError } from './ui/errores.js';
+import { formatearPrecio, parsearPrecio } from './ui/formato.js';
 
 const $ = (s) => document.querySelector(s);
 let estilos = [], texto = '', editando = null, aBajar = null;
@@ -28,7 +29,9 @@ async function cambiarActivo(e, input, valor) {
 function fila(e) {
   const tr = document.createElement('tr');
   if (!e.activo) tr.className = 'inactivo';
-  tr.append(celda(e.nombre, 'col-nombre'), celda(e.descripcion, '', 'Descripción'));
+  const dh = [e.dias_dictado, e.horarios].filter(Boolean).join(' · ');
+  const pr = (e.precio_clase != null || e.precio_mensual != null) ? `Clase ${formatearPrecio(e.precio_clase)} · Mes ${formatearPrecio(e.precio_mensual)}` : '';
+  tr.append(celda(e.nombre, 'col-nombre'), celda(e.descripcion, '', 'Descripción'), celda(dh, '', 'Días y horarios'), celda(pr, '', 'Precios'));
 
   const tdAct = document.createElement('td'); tdAct.className = 'col-activo'; tdAct.dataset.label = 'Activo';
   const sw = document.createElement('label'); sw.className = 'switch';
@@ -76,7 +79,11 @@ function abrirForm(e = null) {
   editando = e;
   const f = $('#form-estilo'); f.reset();
   $('#dlg-titulo').textContent = e ? 'Editar estilo' : 'Nuevo estilo';
-  if (e) { f.nombre.value = e.nombre; f.descripcion.value = e.descripcion ?? ''; }
+  if (e) {
+    f.nombre.value = e.nombre; f.descripcion.value = e.descripcion ?? '';
+    f.precio_clase.value = e.precio_clase ?? ''; f.precio_mensual.value = e.precio_mensual ?? '';
+    f.dias_dictado.value = e.dias_dictado ?? ''; f.horarios.value = e.horarios ?? '';
+  }
   $('#form-error').hidden = true;
   $('#dlg-estilo').showModal();
 }
@@ -84,9 +91,12 @@ function abrirForm(e = null) {
 $('#form-estilo').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const f = ev.target, btn = $('#guardar'), err = $('#form-error');
-  const datos = { nombre: f.nombre.value.trim(), descripcion: f.descripcion.value.trim() || null };
+  const datos = { nombre: f.nombre.value.trim(), descripcion: f.descripcion.value.trim() || null,
+    precio_clase: parsearPrecio(f.precio_clase.value), precio_mensual: parsearPrecio(f.precio_mensual.value),
+    dias_dictado: f.dias_dictado.value.trim() || null, horarios: f.horarios.value.trim() || null };
   const falla = (t) => { err.textContent = t; err.hidden = false; };
   if (!datos.nombre) return falla('Completá el nombre del estilo.');
+  if (Number.isNaN(datos.precio_clase) || Number.isNaN(datos.precio_mensual)) return falla('Los precios deben ser números positivos, por ejemplo 8000 o 8.000,50.');
   btn.disabled = true; err.hidden = true;
   try {
     if (editando) await estilosService.actualizar(editando.id, datos); else await estilosService.crear(datos);
