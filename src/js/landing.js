@@ -3,9 +3,9 @@ import { magnet } from './ui/magnet.js';
 import { initScrollEffects } from './ui/scrollEffects.js';
 
 // ====== EDITAR ACÁ ======
-const WHATSAPP = '549XXXXXXXXXX'; // código de país + área + número, sin signos
+const WHATSAPP = '5491157597489'; // código de país + área + número, sin signos
 const MENSAJE = 'Hola! Quiero reservar una clase de prueba';
-const INSTAGRAM = 'https://instagram.com/tu_academia';
+const INSTAGRAM = 'https://instagram.com/newdancemc';
 const FACEBOOK = 'https://facebook.com/tu.academia';
 const img = (n) => `assets/img/galeria-${n}.jpg`;
 
